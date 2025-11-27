@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppPrevisao.Views.Dashboard"
+             Title="Dashboard">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label 
+            Text="Dashboard"
+            FontSize="20"
+            HorizontalOptions="Center" 
+            FontAttributes="Bold"/>
+
+        <Label 
+            Text="Cidade:"
+            FontSize="18"/>
+        <Entry x:Name="txt_cidade" Placeholder="Digite a cidade"/>
+        <Label 
+            Text="Selecione a data:"
+            FontSize="18"/>
+        <DatePicker x:Name="datePicker"/>
+        <Button Text="Consultar Previsão" Clicked="Button_Clicked_1"/>
+        <Label x:Name="lblPrevisao" FontSize="18" TextColor="Gray"/>
+        <Button Text="Ver Histórico" Clicked="Button_Clicked"/>
+        <Button Text="Sair" Clicked="Button_Clicked_2"/>
+
+    </VerticalStackLayout>
+</ContentPage>

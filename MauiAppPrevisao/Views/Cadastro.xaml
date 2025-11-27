@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppPrevisao.Views.Cadastro"
+             Title="Cadastro">
+    <VerticalStackLayout
+    VerticalOptions="Center"
+    Spacing="10"
+    Padding="20">
+
+        <Label 
+            FontFamily="Poppins-ExtraBold.tff"
+            FontSize="50"
+            Text="Cadastro"
+            HorizontalOptions="Center" />
+
+        <Label Text="Nome: " />
+        <Entry x:Name="txt_nome" Placeholder="Digite seu nome"/>
+
+        <Label Text="Email: " />
+        <Entry x:Name="txt_email" Placeholder="Digite seu email"/>
+
+        <Label Text="Data de Nascimento: " />
+        <DatePicker x:Name="txt_Dnas"/>
+
+        <Label Text="Senha:" />
+        <Entry x:Name="txt_senha" IsPassword="True" Placeholder="Digite uma senha forte"/>
+
+        <Button Text="Cadastrar"
+            Clicked="Button_Clicked"
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="Já tem uma conta? Entrar"
+            HorizontalOptions="Center"
+            TextColor="Blue">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+    </VerticalStackLayout>
+</ContentPage>
