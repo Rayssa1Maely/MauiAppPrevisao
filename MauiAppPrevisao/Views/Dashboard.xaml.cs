@@ -42,7 +42,6 @@ public partial class Dashboard : ContentPage
     {
         InitializeComponent();
         _httpClient = new HttpClient();
-        datePicker.Date = DateTime.Today;
     }
 
     private async void Button_Clicked(object sender, EventArgs e)

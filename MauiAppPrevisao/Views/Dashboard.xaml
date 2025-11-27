@@ -27,10 +27,6 @@
                         <Label Grid.Row="0" Grid.Column="0" Text="Cidade:" TextColor="#333"/>
                         <Entry Grid.Row="1" Grid.Column="0" x:Name="txt_cidade" Placeholder="Ex: São Paulo" 
                                PlaceholderColor="#AAA" />
-
-                        <Label Grid.Row="0" Grid.Column="1" Text="Data (Não usada pela API):" TextColor="#333"/>
-                        <DatePicker Grid.Row="1" Grid.Column="1" x:Name="datePicker" Format="dd/MM/yyyy" 
-                                    HorizontalOptions="FillAndExpand" />
                     </Grid>
 
                     <Button Text="Consultar Previsão" 
