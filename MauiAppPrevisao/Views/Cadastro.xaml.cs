@@ -23,6 +23,8 @@ public partial class Cadastro : ContentPage
             };
 
             await App.Db.Insert(usuario);
+            App.UsuarioLogadoId = usuario.Id;
+
             await DisplayAlert("Sucesso!", "Usuário cadastrado com sucesso! Seja bem vindo(a)!!", "OK");
 
             await Navigation.PushAsync(new Dashboard());
