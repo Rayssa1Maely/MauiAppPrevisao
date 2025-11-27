@@ -5,6 +5,9 @@ namespace MauiAppPrevisao
 {
     public partial class App : Application
     {
+        
+        public static int UsuarioLogadoId { get; set; } = 0; 
+
         static SQLiteDatabaseHelper _db;
 
         public static SQLiteDatabaseHelper Db

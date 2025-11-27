@@ -1,8 +1,4 @@
-using Android.SE.Omapi;
 using MauiAppPrevisao.Models;
-using MauiAppPrevisao.Services;
-using MauiAppPrevisao.Models;
-using MauiAppPrevisao.Views;
 using Microsoft.Maui.Controls;
 using System;
 using System.Linq;
@@ -10,58 +6,52 @@ using System.Threading.Tasks;
 
 namespace MauiAppPrevisao.Views
 {
-    public partial class Cadastro : ContentPage
+    public partial class Historico : ContentPage
     {
-        private readonly UserService _userService;
-
-        public Cadastro(UserService userService)
+        public Historico()
         {
             InitializeComponent();
-            _userService = userService;
+
+            StartDatePicker.Date = DateTime.Today.AddDays(-7);
+            EndDatePicker.Date = DateTime.Today;
         }
 
-        private async void OnRegisterClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            var newUser = new Usuario
-            {
-                Nome = NameEntry.Text,     
-                Email = EmailEntry.Text,   
-                DataNascimento = BirthDatePicker.Date.ToString("yyyy-MM-dd") 
-            };
+            base.OnAppearing();
+            await LoadHistoryAsync(StartDatePicker.Date, EndDatePicker.Date);
+        }
 
-            string rawPassword = PasswordEntry.Text; 
+        private async Task LoadHistoryAsync(DateTime start, DateTime end)
+        {
+            if (App.UsuarioLogadoId == 0)
+            {
+                await DisplayAlert("Erro", "Nenhum usuário logado. Retornando ao Login.", "OK");
+                await Navigation.PopToRootAsync();
+                return;
+            }
 
             try
             {
-               
-                await _userService.RegisterUser(newUser, rawPassword);
+                var historico = await App.Db.GetHistoricoByDateRangeAsync(App.UsuarioLogadoId, start, end);
 
-             
-                await DisplayAlert("Sucesso", "Usuário cadastrado com sucesso! Você será redirecionado para o Login.", "OK");
-
-               
-                await Shell.Current.GoToAsync($"//{nameof(Login)}");
+                HistoryListView.ItemsSource = historico.ToList();
             }
-            
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
-                await DisplayAlert("Erro de Validação", ex.Message, "OK");
-            }
-          
-            catch (InvalidOperationException ex)
-            {
-                await DisplayAlert("Erro de Cadastro", ex.Message, "OK");
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Erro", "Ocorreu um erro inesperado ao cadastrar. Verifique sua conexão.", "OK");
+                await DisplayAlert("Erro ao Carregar Histórico", ex.Message, "OK");
             }
         }
 
-      
-        private async void OnLoginTapped(object sender, TappedEventArgs e)
+        private async void OnFilterClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(Login)}");
+            if (StartDatePicker.Date > EndDatePicker.Date)
+            {
+                await DisplayAlert("Erro de Filtro", "A Data Inicial não pode ser posterior à Data Final.", "OK");
+                return;
+            }
+
+            await LoadHistoryAsync(StartDatePicker.Date, EndDatePicker.Date);
         }
     }
 }

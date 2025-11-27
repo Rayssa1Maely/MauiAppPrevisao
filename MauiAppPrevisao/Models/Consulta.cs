@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MauiAppPrevisao.Models
 {
-    internal class Consulta
+    public class Consulta
     {
         
         [PrimaryKey, AutoIncrement]

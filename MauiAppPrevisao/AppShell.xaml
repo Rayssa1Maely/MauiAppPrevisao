@@ -7,8 +7,8 @@
     Title="MauiAppPrevisao">
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:Login}"
-        Route="LoginRoute" />
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>

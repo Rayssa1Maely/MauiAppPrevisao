@@ -1,13 +1,14 @@
 using MauiAppPrevisao.Models;
+using System;
 
 namespace MauiAppPrevisao.Views;
 
 public partial class Cadastro : ContentPage
 {
-	public Cadastro()
-	{
-		InitializeComponent();
-	}
+    public Cadastro()
+    {
+        InitializeComponent();
+    }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
@@ -17,12 +18,13 @@ public partial class Cadastro : ContentPage
             {
                 Nome = txt_nome.Text,
                 Email = txt_email.Text,
-                DataNascimento = txt_Dnas.Text,
+                DataNascimento = txt_Dnas.Date.ToString("yyyy-MM-dd"),
                 Senha = txt_senha.Text
             };
 
             await App.Db.Insert(usuario);
-            await DisplayAlert("Sucesso!", "Seja bem vindo(a)!!", "OK");
+            await DisplayAlert("Sucesso!", "Usuário cadastrado com sucesso! Seja bem vindo(a)!!", "OK");
+
             await Navigation.PushAsync(new Dashboard());
 
         }

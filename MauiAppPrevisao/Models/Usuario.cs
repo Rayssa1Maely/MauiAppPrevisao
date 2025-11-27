@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SQLite;
 
@@ -15,7 +16,6 @@ namespace MauiAppPrevisao.Models
         string _senha;
 
         [PrimaryKey, AutoIncrement]
-
         public int Id { get; set; }
 
         public string Nome
@@ -23,13 +23,11 @@ namespace MauiAppPrevisao.Models
             get => _nome;
             set
             {
-                if (value == null)
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception(
-                        "Por favor, preencha o nome");
+                    throw new Exception("Por favor, preencha o nome.");
                 }
-                _nome = value;
-
+                _nome = value.Trim();
             }
         }
 
@@ -38,13 +36,12 @@ namespace MauiAppPrevisao.Models
             get => _dataNascimento;
             set
             {
-                if (value == null)
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception(
-                        "Por favor, preencha com a sua Data de Nascimento");
+                    throw new Exception("Por favor, preencha com a sua Data de Nascimento.");
                 }
+               
                 _dataNascimento = value;
-
             }
         }
 
@@ -53,13 +50,16 @@ namespace MauiAppPrevisao.Models
             get => _email;
             set
             {
-                if (value == null)
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception(
-                        "Por favor, preencha o email ");
+                    throw new Exception("Por favor, preencha o email.");
                 }
-                _email = value;
-
+              
+                if (!Regex.IsMatch(value.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                {
+                    throw new Exception("O email inserido não é válido.");
+                }
+                _email = value.Trim();
             }
         }
 
@@ -68,15 +68,17 @@ namespace MauiAppPrevisao.Models
             get => _senha;
             set
             {
-                if (value == null)
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception(
-                        "Por favor, preencha a Senha");
+                    throw new Exception("Por favor, preencha a Senha.");
+                }
+                
+                if (value.Length < 6)
+                {
+                    throw new Exception("A senha deve ter no mínimo 6 caracteres.");
                 }
                 _senha = value;
-
             }
         }
     }
-
-    }
+}

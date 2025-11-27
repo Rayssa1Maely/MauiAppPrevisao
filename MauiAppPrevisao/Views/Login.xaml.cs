@@ -4,23 +4,26 @@ namespace MauiAppPrevisao.Views;
 
 public partial class Login : ContentPage
 {
-	public Login()
-	{
-		InitializeComponent();
-	}
+    public Login()
+    {
+        InitializeComponent();
+    }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
         try
         {
             var resultado = await App.Db.Search(txt_email.Text, txt_senha.Text);
-            if(resultado.Count == 0)
+
+            if (resultado == null || resultado.Count == 0)
             {
                 await DisplayAlert("Erro", "Email ou senha incorretos!", "OK");
                 return;
             }
 
-            await DisplayAlert("Sucesso!", "Olá", "OK");
+            App.UsuarioLogadoId = resultado.First().Id;
+
+            await DisplayAlert("Sucesso!", $"Olá, {resultado.First().Nome}!", "OK");
             await Navigation.PushAsync(new Dashboard());
 
         }
