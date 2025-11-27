@@ -2,26 +2,71 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppPrevisao.Views.Dashboard"
-             Title="Dashboard">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label 
-            Text="Dashboard"
-            FontSize="20"
-            HorizontalOptions="Center" 
-            FontAttributes="Bold"/>
+             Title="Previsão do Tempo"
+             BackgroundColor="#F0F8FF">
 
-        <Label 
-            Text="Cidade:"
-            FontSize="18"/>
-        <Entry x:Name="txt_cidade" Placeholder="Digite a cidade"/>
-        <Label 
-            Text="Selecione a data:"
-            FontSize="18"/>
-        <DatePicker x:Name="datePicker"/>
-        <Button Text="Consultar Previsão" Clicked="Button_Clicked_1"/>
-        <Label x:Name="lblPrevisao" FontSize="18" TextColor="Gray"/>
-        <Button Text="Ver Histórico" Clicked="Button_Clicked"/>
-        <Button Text="Sair" Clicked="Button_Clicked_2"/>
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="25">
 
-    </VerticalStackLayout>
+            <Label 
+                Text="Previsão do Tempo"
+                FontSize="28"
+                HorizontalOptions="Center" 
+                FontAttributes="Bold"
+                TextColor="#1976D2"
+                Margin="0, 10, 0, 10"/>
+
+            <Border BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="#E0E0E0">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="🔎 Encontre a Previsão" FontSize="20" FontAttributes="Bold" TextColor="#3F51B5"/>
+
+     
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="10" RowSpacing="10">
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="Cidade:" TextColor="#333"/>
+                        <Entry Grid.Row="1" Grid.Column="0" x:Name="txt_cidade" Placeholder="Ex: São Paulo" 
+                               PlaceholderColor="#AAA" />
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="Data (Não usada pela API):" TextColor="#333"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1" x:Name="datePicker" Format="dd/MM/yyyy" 
+                                    HorizontalOptions="FillAndExpand" />
+                    </Grid>
+
+                    <Button Text="Consultar Previsão" 
+                            Clicked="Button_Clicked_1"
+                            BackgroundColor="#03A9F4" 
+                            TextColor="White"
+                            CornerRadius="8"
+                            FontAttributes="Bold"
+                            Margin="0, 10, 0, 0"/>
+                </VerticalStackLayout>
+            </Border>
+        
+            <Border BackgroundColor="#E1F5FE" Padding="20" StrokeShape="RoundRectangle 12" StrokeThickness="0">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Resultado da Consulta:" FontSize="18" FontAttributes="Bold" TextColor="#01579B"/>
+                    <Label x:Name="lblPrevisao" FontSize="22" TextColor="#01579B" LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Spacing="10" Margin="0, 15, 0, 0">
+
+                <Button Text="Ver Histórico de Consultas" 
+                        Clicked="Button_Clicked"
+                        BackgroundColor="#7986CB" 
+                        TextColor="White"
+                        CornerRadius="8"
+                        FontAttributes="Bold"/>
+
+                <Button Text="Sair" 
+                        Clicked="Button_Clicked_2"
+                        BackgroundColor="#EF5350" 
+                        TextColor="White"
+                        CornerRadius="8"
+                        FontAttributes="Bold"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

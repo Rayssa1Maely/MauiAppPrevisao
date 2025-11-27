@@ -2,42 +2,64 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppPrevisao.Views.Cadastro"
-             Title="Cadastro">
-    <VerticalStackLayout
-    VerticalOptions="Center"
-    Spacing="10"
-    Padding="20">
+             Title="Cadastro"
+             BackgroundColor="#F0F8FF">
 
-        <Label 
-            FontFamily="Poppins-ExtraBold.tff"
-            FontSize="50"
-            Text="Cadastro"
-            HorizontalOptions="Center" />
+    <ScrollView VerticalOptions="Center">
+        <VerticalStackLayout
+            VerticalOptions="Center"
+            Spacing="15"
+            Padding="25">
 
-        <Label Text="Nome: " />
-        <Entry x:Name="txt_nome" Placeholder="Digite seu nome"/>
+            <Border BackgroundColor="White" 
+                    Padding="30" 
+                    StrokeShape="RoundRectangle 15" 
+                    StrokeThickness="1" 
+                    Stroke="#E0E0E0"
+                    HorizontalOptions="FillAndExpand">
 
-        <Label Text="Email: " />
-        <Entry x:Name="txt_email" Placeholder="Digite seu email"/>
+                <VerticalStackLayout Spacing="20">
 
-        <Label Text="Data de Nascimento: " />
-        <DatePicker x:Name="txt_Dnas"/>
+                    <Label 
+                        Text="Novo Usuário"
+                        FontSize="32"
+                        TextColor="#1976D2"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"/>
 
-        <Label Text="Senha:" />
-        <Entry x:Name="txt_senha" IsPassword="True" Placeholder="Digite uma senha forte"/>
+                    <Label Text="Nome Completo:" TextColor="#333" FontAttributes="Bold"/>
+                    <Entry x:Name="txt_nome" Placeholder="Digite seu nome" Margin="0, -5, 0, 0"/>
 
-        <Button Text="Cadastrar"
-            Clicked="Button_Clicked"
-            HorizontalOptions="Center" />
+                    <Label Text="Email:" TextColor="#333" FontAttributes="Bold"/>
+                    <Entry x:Name="txt_email" Placeholder="Digite seu email" Keyboard="Email" Margin="0, -5, 0, 0"/>
 
-        <Label 
-            Text="Já tem uma conta? Entrar"
-            HorizontalOptions="Center"
-            TextColor="Blue">
+                    <Label Text="Data de Nascimento:" TextColor="#333" FontAttributes="Bold"/>
+                    <DatePicker x:Name="txt_Dnas" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand" Margin="0, -5, 0, 0"/>
 
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-            </Label.GestureRecognizers>
-        </Label>
-    </VerticalStackLayout>
+                    <Label Text="Senha (Mín. 6 caracteres):" TextColor="#333" FontAttributes="Bold"/>
+                    <Entry x:Name="txt_senha" IsPassword="True" Placeholder="Crie uma senha forte" Margin="0, -5, 0, 0"/>
+
+                    <Button Text="Cadastrar"
+                            Clicked="Button_Clicked"
+                            BackgroundColor="#4CAF50" 
+                            TextColor="White"
+                            CornerRadius="8"
+                            FontAttributes="Bold"
+                            Margin="0, 10, 0, 0"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label 
+                Text="Já tem uma conta? Entrar"
+                HorizontalOptions="Center"
+                TextColor="#3F51B5"
+                FontAttributes="Bold"
+                Margin="0, 15, 0, 0">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -3,38 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppPrevisao.Views.Historico"
              Title="Histórico de Consultas"
-             BackgroundColor="#E8EAF6">
+             BackgroundColor="#F0F8FF">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="25" Spacing="20">
 
-        <Frame BackgroundColor="White" Padding="15" CornerRadius="8" HasShadow="True">
-            <VerticalStackLayout Spacing="10">
-                <Label Text="Filtrar por Intervalo de Datas" FontSize="18" FontAttributes="Bold" TextColor="#3F51B5"/>
+        <Label 
+            Text="Histórico de Consultas"
+            FontSize="28"
+            HorizontalOptions="Center" 
+            FontAttributes="Bold"
+            TextColor="#1976D2"
+            Margin="0, 10, 0, 10"/>
 
-                <Grid ColumnDefinitions="*, *, Auto" ColumnSpacing="10">
+        <Border BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="#E0E0E0">
+            <VerticalStackLayout Spacing="15">
+                <Label Text="📅 Filtrar por Intervalo de Datas" FontSize="20" FontAttributes="Bold" TextColor="#3F51B5"/>
 
-                    <DatePicker Grid.Column="0" x:Name="StartDatePicker" Format="dd/MM/yyyy" />
-                    <DatePicker Grid.Column="1" x:Name="EndDatePicker" Format="dd/MM/yyyy" />
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
 
-                    <Button Grid.Column="2" Text="Filtrar" Clicked="OnFilterClicked" 
-                            BackgroundColor="#5C6BC0" TextColor="White" CornerRadius="5" />
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Data Inicial:" TextColor="#333" FontSize="14"/>
+                        <DatePicker x:Name="StartDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Data Final:" TextColor="#333" FontSize="14"/>
+                        <DatePicker x:Name="EndDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+                    </VerticalStackLayout>
                 </Grid>
-            </VerticalStackLayout>
-        </Frame>
 
-        <Label Text="Consultas Realizadas:" FontSize="16" FontAttributes="Bold" TextColor="#333" Margin="0, 10, 0, 0"/>
+                <Button Text="Aplicar Filtro" 
+                        Clicked="OnFilterClicked" 
+                        BackgroundColor="#7986CB" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontAttributes="Bold"
+                        Margin="0, 10, 0, 0"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Label Text="Consultas Registradas:" FontSize="18" FontAttributes="Bold" TextColor="#333" Margin="0, 10, 0, 0"/>
 
         <ListView x:Name="HistoryListView" HasUnevenRows="True" SelectionMode="None" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Margin="5" Padding="10" CornerRadius="5" BackgroundColor="#F5F5F5">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding Cidade}" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
-                                <Label Text="{Binding DataConsulta, StringFormat='Data: {0:dd/MM/yyyy HH:mm}'}" 
-                                       FontSize="14" TextColor="#666" />
+                        <Border Margin="0, 5" Padding="15" StrokeShape="RoundRectangle 8" BackgroundColor="#E3F2FD" StrokeThickness="0">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Cidade}" FontSize="20" FontAttributes="Bold" TextColor="#0277BD" />
+                                <Label Text="{Binding DataConsulta, StringFormat='Realizada em: {0:dd/MM/yyyy HH:mm}'}" 
+                                       FontSize="14" TextColor="#546E7A" />
+                                <BoxView HeightRequest="1" BackgroundColor="#B0BEC5" Margin="0, 5, 0, 0"/>
+                                <Label Text="{Binding PrevisaoDetalhes}" 
+                                       FontSize="16" FontAttributes="Italic" TextColor="#37474F" />
                             </VerticalStackLayout>
-                        </Frame>
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
