@@ -5,46 +5,50 @@
              Title="Histórico de Consultas"
              BackgroundColor="#F0F8FF">
 
-    <VerticalStackLayout Padding="25" Spacing="20">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="25" RowSpacing="10">
 
-        <Label 
-            Text="Histórico de Consultas"
-            FontSize="28"
-            HorizontalOptions="Center" 
-            FontAttributes="Bold"
-            TextColor="#1976D2"
-            Margin="0, 10, 0, 10"/>
+        <VerticalStackLayout Grid.Row="0" Spacing="20">
+            <Label 
+                Text="Histórico de Consultas"
+                FontSize="28"
+                HorizontalOptions="Center" 
+                FontAttributes="Bold"
+                TextColor="#1976D2"
+                Margin="0, 10, 0, 10"/>
 
-        <Border BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="#E0E0E0">
-            <VerticalStackLayout Spacing="15">
-                <Label Text="📅 Filtrar por Intervalo de Datas" FontSize="20" FontAttributes="Bold" TextColor="#3F51B5"/>
+            <Border BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="#E0E0E0">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="📅 Filtrar por Intervalo de Datas" FontSize="20" FontAttributes="Bold" TextColor="#3F51B5"/>
 
-                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Data Inicial:" TextColor="#333" FontSize="14"/>
+                            <DatePicker x:Name="StartDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+                        </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="0" Spacing="5">
-                        <Label Text="Data Inicial:" TextColor="#333" FontSize="14"/>
-                        <DatePicker x:Name="StartDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
-                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Data Final:" TextColor="#333" FontSize="14"/>
+                            <DatePicker x:Name="EndDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+                        </VerticalStackLayout>
+                    </Grid>
 
-                    <VerticalStackLayout Grid.Column="1" Spacing="5">
-                        <Label Text="Data Final:" TextColor="#333" FontSize="14"/>
-                        <DatePicker x:Name="EndDatePicker" Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
-                    </VerticalStackLayout>
-                </Grid>
+                    <Button Text="Aplicar Filtro" 
+                            Clicked="OnFilterClicked" 
+                            BackgroundColor="#7986CB" 
+                            TextColor="White" 
+                            CornerRadius="8"
+                            FontAttributes="Bold"
+                            Margin="0, 10, 0, 0"/>
+                </VerticalStackLayout>
+            </Border>
 
-                <Button Text="Aplicar Filtro" 
-                        Clicked="OnFilterClicked" 
-                        BackgroundColor="#7986CB" 
-                        TextColor="White" 
-                        CornerRadius="8"
-                        FontAttributes="Bold"
-                        Margin="0, 10, 0, 0"/>
-            </VerticalStackLayout>
-        </Border>
+            <Label Text="Consultas Registradas:" FontSize="18" FontAttributes="Bold" TextColor="#333" Margin="0, 10, 0, 0"/>
+        </VerticalStackLayout>
 
-        <Label Text="Consultas Registradas:" FontSize="18" FontAttributes="Bold" TextColor="#333" Margin="0, 10, 0, 0"/>
-
-        <ListView x:Name="HistoryListView" HasUnevenRows="True" SelectionMode="None" VerticalOptions="FillAndExpand">
+        <ListView Grid.Row="1" 
+                  x:Name="HistoryListView" 
+                  HasUnevenRows="True" 
+                  SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -62,15 +66,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
-        <Button Text="Voltar" 
-        Clicked="Button_Clicked" 
-        BackgroundColor="#7986CB" 
-        TextColor="White" 
-        CornerRadius="8"
-        FontAttributes="Bold"
-        Margin="0, 10, 0, 0"/>
 
-    </VerticalStackLayout>
-    
+        <Button Grid.Row="2"
+                Text="Voltar" 
+                Clicked="Button_Clicked" 
+                BackgroundColor="#7986CB" 
+                TextColor="White" 
+                CornerRadius="8"
+                FontAttributes="Bold"
+                Margin="0, 10, 0, 0"/>
+
+    </Grid>
+
 </ContentPage>
