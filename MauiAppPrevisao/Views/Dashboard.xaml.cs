@@ -107,4 +107,5 @@ public partial class Dashboard : ContentPage
         App.UsuarioLogadoId = 0;
         await Navigation.PopToRootAsync();
     }
+
 }

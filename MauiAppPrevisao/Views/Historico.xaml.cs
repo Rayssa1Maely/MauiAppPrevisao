@@ -53,5 +53,10 @@ namespace MauiAppPrevisao.Views
 
             await LoadHistoryAsync(StartDatePicker.Date, EndDatePicker.Date);
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }
